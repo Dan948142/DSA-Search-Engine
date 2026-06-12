@@ -99,7 +99,7 @@ app.post("/search", async (req, res) => {
   const top = scores
     .filter((s) => s.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 10)
+    .slice(0, 30)   // top 30 search results will be shown
     .map(({ idx }) => {
       const p = problems[idx];
       const platform = p.url.includes("leetcode.com")
