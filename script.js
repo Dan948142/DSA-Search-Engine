@@ -10,7 +10,6 @@ form.addEventListener("submit", async (e) => {
   if (!query) return;
 
   resultsDiv.innerHTML = "";
-  // FIXED: Changed "hidden" to "spinner-hidden"
   spinner.classList.remove("spinner-hidden"); 
 
   try {
