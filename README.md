@@ -281,24 +281,6 @@ This project demonstrates:
 - [ ] Unit and integration tests
 - [ ] API rate limiting and caching
 
-## 🤝 Contributing
-
-Contributions are welcome! Areas for contribution:
-
-1. **New Problem Platforms**: Add more coding platforms
-2. **Search Algorithm**: Implement advanced ranking algorithms
-3. **UI/UX**: Enhance frontend design
-4. **Performance**: Optimize search and indexing
-5. **Testing**: Add comprehensive test suite
-6. **Documentation**: Improve code comments and guides
-
-### How to Contribute
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
 
 ## 📝 License
 
@@ -307,43 +289,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## 👨‍💻 Author
 
 **Sanskar Sovitkar**
-
-## ❓ FAQ
-
-**Q: Why does the first search take longer?**
-A: The index is built on server startup, which takes 5-10 seconds. Subsequent searches are instant.
-
-**Q: Can I use this for production?**
-A: This is designed for learning purposes. For production, add database layer, authentication, rate limiting, and tests.
-
-**Q: How often is data updated?**
-A: You can manually run `npm run scrape` to fetch latest problems from platforms.
-
-**Q: Why only LeetCode and Codeforces?**
-A: CodeChef integration is in progress. Other platforms can be added following the scraper pattern.
-
-**Q: What if a search returns no results?**
-A: Try simpler keywords or different topic names. The search is keyword-based, not semantic.
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-- Open an issue on GitHub
-- Check existing documentation
-- Review the code comments for implementation details
-
-## 🎯 Interview Talking Points
-
-When discussing this project in interviews:
-
-1. **Problem Solving**: How did you approach building a scalable search engine?
-2. **Algorithm Selection**: Why TF-IDF and cosine similarity over alternatives?
-3. **Trade-offs**: Discuss complexity vs. performance decisions
-4. **Optimization**: How would you handle 1M+ problems?
-5. **Scalability**: Database integration, caching strategies
-6. **Testing**: Approach to testing search accuracy
-7. **Deployment**: Containerization, cloud deployment
-8. **User Feedback**: How to measure search quality?
 
 ---
 
