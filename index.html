@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link 
+            rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>" 
+        />
+        <link rel="stylesheet" href="style.css"/>
+        <title>DSA Search Engine</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Search 3500+ DSA Problems in seconds!!</h1>
+                <p class="tagline">
+                    Instantly find coding challenges across
+                    <img
+                        src="assets/logos/Codeforces.png"
+                        alt="Codeforces"
+                        class="platform-icon"
+                    />
+                    <img
+                        src="assets/logos/Leetcode.png"
+                        alt="Leetcode"
+                        class="platform-icon"
+                    />
+                    <img
+                        src="assets/logos/Codechef.png"
+                        alt="Codechef"
+                        class="platform-icon"
+                    />
+                    All in one Place...
+                </p>
+            </div>
+
+            <form class="search-form" id="search-form">
+                <input
+                    id="querry-input"
+                    class="querry-input"
+                    type="text"
+                    placeholder="Enter Problem Name"
+                    autocomplete="off"
+                />
+                <button type="submit">Search</button>
+            </form>
+            <p class="cta">Type a topic, tag or title above to begin your search.</p>
+            
+            <div id="spinner" class="spinner-hidden" aria-hidden="true"></div>
+
+            <div id="results" class="results"></div>
+        </div>
+
+        <canvas id="particle-canvas"></canvas>
+
+        <script>
+            const canvas = document.getElementById("particle-canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let particlesArray = [];
+            const numberOfParticles = 80;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = (Math.random() * 1) - 0.5;
+                    this.speedY = (Math.random() * 1) - 0.5;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.size > 0.2) this.size -= 0.01;
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.fillStyle = 'rgba(56, 189, 248, 0.8)'; // Cyan color
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function init() {
+                particlesArray = [];
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                    
+                    // Draw lines between close particles
+                    for (let j = i; j < particlesArray.length; j++) {
+                        const dx = particlesArray[i].x - particlesArray[j].x;
+                        const dy = particlesArray[i].y - particlesArray[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(129, 140, 248, ${1 - distance/100})`; // Indigo lines
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                            ctx.closePath();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                init();
+            });
+
+            init();
+            animate();
+        </script>
+
+        <script src="./script.js"></script>
+    </body>
+</html>

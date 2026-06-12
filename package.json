@@ -1,0 +1,23 @@
+{
+  "name": "dsa-search-engine",
+  "version": "1.0.0",
+  "description": "A DSA problem search engine leveraging web scraping, efficient data storage, and a Node.js backend implementing TF-IDF to provide relevant results for user queries via a React web interface.",
+  "license": "ISC",
+  "author": "Sanskar Sovitkar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "merge": "node utils/merge.js",
+    "scrape" : "node scrape.js" ,
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "natural": "^8.1.0",
+    "puppeteer": "^24.10.2",
+    "stopword": "^3.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

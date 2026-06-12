@@ -1,0 +1,239 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* The Background Effect */
+body {
+    background-color: #0f172a; 
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(129, 140, 248, 0.12), transparent 40%);
+    background-size: 200% 200%;
+    animation: breathingBackground 15s ease infinite;
+    background-attachment: fixed;
+    
+    color: #f8fafc;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Subtle animation for the ambient light */
+@keyframes breathingBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main Container Layout */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Forces horizontal centering */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers children horizontally */
+    justify-content: center; /* Centers children vertically */
+}
+
+/* Hero Section */
+.hero-content {
+    width: 100%; /* Ensures it spans the container to calculate center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #e0f2fe; 
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+    text-align: center; /* Double fallback for text centering */
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #94a3b8; /* Slate text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.platform-icon {
+    height: 28px;
+    width: auto;
+    vertical-align: middle;
+    border-radius: 4px;
+    object-fit: contain;
+    filter: drop-shadow(0px 0px 4px rgba(255,255,255,0.2)); 
+}
+
+/* Search Bar & Form (Glassmorphism effect) */
+.search-form {
+    width: 100%;
+    max-width: 750px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+    .search-form {
+        flex-direction: row;
+    }
+}
+
+.querry-input {
+    flex: 1;
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+    
+    /* Glass effect */
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    border: 2px solid #334155;
+    
+    border-radius: 50px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.querry-input::placeholder {
+    color: #64748b;
+    font-weight: 400;
+}
+
+.querry-input:focus {
+    outline: none;
+    border-color: #38bdf8; /* Vibrant cyan */
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    background: rgba(30, 41, 59, 0.8);
+}
+
+.search-form button {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: #38bdf8; /* Vibrant cyan */
+    color: #0f172a; /* Deep navy text */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-form button:hover {
+    background: #7dd3fc;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+}
+
+.cta {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+/* Loading Spinner */
+.spinner-hidden {
+    display: none !important;
+}
+
+#spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid #334155;
+    border-top: 4px solid #38bdf8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Results Grid */
+.results {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual Question Card (Glassmorphism effect) */
+.question {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.question:hover {
+    transform: translateY(-5px);
+    border-color: #818cf8; /* Soft indigo border on hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(129, 140, 248, 0.1);
+    background: rgba(30, 41, 59, 0.8);
+}
+
+/* Logo + title row inside each result card */
+.question .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.question a {
+    text-decoration: none;
+    color: #38bdf8;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    transition: color 0.2s ease;
+}
+
+.question a:hover {
+    color: #e0f2fe;
+}
+
+.question p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; 
+    pointer-events: none; /* Prevents it from blocking clicks on your search bar */
+}
