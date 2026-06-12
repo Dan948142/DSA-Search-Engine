@@ -1,23 +1,28 @@
-import fs from 'fs';
+import fsPromises from "fs/promises";
+import path from "path";
 
-try {
-    const leetcodeData = fs.readFileSync('./problems/leetcode_problems.json', 'utf-8');
-    const codeforcesData = fs.readFileSync('./problems/codeforces_problems.json', 'utf-8');
+async function mergeProblemData() {
+  const codeforcesPath = path.resolve("./problems/codeforces_problems.json");
+  const leetcodePath = path.resolve("./problems/leetcode_problems.json");
 
-    const leetcode = JSON.parse(leetcodeData);
-    const codeforces = JSON.parse(codeforcesData);
+  // Read the files and map over them to inject the "platform" property
+  const codeforcesData = JSON.parse(await fsPromises.readFile(codeforcesPath, "utf-8"))
+      .map(problem => ({ ...problem, platform: "Codeforces" }));
+      
+  const leetcodeData = JSON.parse(await fsPromises.readFile(leetcodePath, "utf-8"))
+      .map(problem => ({ ...problem, platform: "Leetcode" }));
 
-    const mergedProblems = [...leetcode, ...codeforces];
+  // Combine them safely
+  const combined = [...codeforcesData, ...leetcodeData];
 
-    fs.mkdirSync('./corpus', { recursive: true });
+  await fsPromises.mkdir("./corpus", { recursive: true });
 
-    fs.writeFileSync(
-        './corpus/all_problems.json', 
-        JSON.stringify(mergedProblems, null, 2)
-    );
-
-    console.log(`✅ Successfully merged ${mergedProblems.length} problems into corpus/all_problems.json!`);
-
-} catch (error) {
-    console.error("❌ Error merging files. Check if your scraped files exist and are valid:", error.message);
+  await fsPromises.writeFile(
+    "./corpus/all_problems.json",
+    JSON.stringify(combined, null, 2)
+  );
+  
+  console.log(`✅ Successfully merged ${combined.length} problems with platform tags!`);
 }
+
+mergeProblemData();
